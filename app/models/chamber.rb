@@ -1,3 +1,4 @@
 class Chamber < ApplicationRecord
-  has_many :user_chambers, dependent: :destroy
+  belongs_to :user
+  has_many :comments
 end

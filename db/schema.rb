@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_15_141318) do
+ActiveRecord::Schema.define(version: 2022_06_15_162607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,15 +21,16 @@ ActiveRecord::Schema.define(version: 2022_06_15_141318) do
     t.integer "hygrometrie"
     t.date "day"
     t.boolean "isValid"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_chambers_on_user_id"
   end
 
-  create_table "user_chambers", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "comments", force: :cascade do |t|
     t.bigint "chamber_id", null: false
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["chamber_id"], name: "index_user_chambers_on_chamber_id"
-    t.index ["user_id"], name: "index_user_chambers_on_user_id"
+    t.index ["chamber_id"], name: "index_comments_on_chamber_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,6 +50,6 @@ ActiveRecord::Schema.define(version: 2022_06_15_141318) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "user_chambers", "chambers"
-  add_foreign_key "user_chambers", "users"
+  add_foreign_key "chambers", "users"
+  add_foreign_key "comments", "chambers"
 end

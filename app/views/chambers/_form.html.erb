@@ -3,5 +3,11 @@
   <%= f.input :temperature %>
   <%= f.input :hygrometrie %>
   <%= f.input :day %>
+  <% if current_user.role == "admin" %>
+    <%= f.association :user %>
+  <% end  %>
+  <% if current_user.role == "officine" %>
+    <%= f.input :isValid %>
+  <% end  %>
   <%= f.submit "Nouvelle chambre froide", class: "btn btn-outline-primary " %>
 <% end %>
