@@ -20,10 +20,11 @@
         <% if current_user.role == "admin" %>
           <%= link_to "Editer la chambre froide", edit_chamber_path(@chamber), class: "btn btn-primary mb-2" %>
         <% end %>
-
       </div>
     </div>
   </div>
+
+
   <% if current_user.role == "officine" %>
           <%= simple_form_for @chamber do |f| %>
             <%= f.input :isValid %>
