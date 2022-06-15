@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2022_06_15_141318) do
   enable_extension "plpgsql"
 
   create_table "chambers", force: :cascade do |t|
+    t.string "name"
     t.integer "temperature"
     t.integer "hygrometrie"
     t.date "day"

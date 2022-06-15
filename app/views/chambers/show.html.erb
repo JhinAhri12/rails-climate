@@ -1,0 +1,16 @@
+<div class="container">
+
+<%= link_to "Back", root_path,class: "btn btn-outline-primary mt-2" %>
+
+  <div class="row">
+    <div class="col-md-12 card text-center mt-2 mb-1">
+      <div class="card-body">
+        <h2><%= @chamber.name %></h2>
+        <img class="img-thumbnail" src="https://www.dagard.com/files/2020/03/euexpo-cuisine-516-lyon-02-2019-18-e1585214779656.jpg" alt="chambre froide">
+        <p> température : <%= @chamber.temperature %></p>
+        <p> hygrometrie : <%= @chamber.hygrometrie %></p>
+        <p> date : <%= @chamber.day %></p>
+      </div>
+    </div>
+  </div>
+</div>

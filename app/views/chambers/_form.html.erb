@@ -1,0 +1,7 @@
+<%= simple_form_for @chamber do |f| %>
+  <%= f.input :name %>
+  <%= f.input :temperature %>
+  <%= f.input :hygrometrie %>
+  <%= f.input :day %>
+  <%= f.submit "Nouvelle chambre froide", class: "btn btn-outline-primary " %>
+<% end %>
