@@ -1,2 +1,19 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+
+<div class="container">
+
+<h1>RD Temp</h1>
+
+  <div class="row">
+  <% @chambers.each do |chamber| %>
+    <div class="col-md-4 card text-center">
+      <div class="card-body">
+        <img class="img-thumbnail" src="https://www.dagard.com/files/2020/03/euexpo-cuisine-516-lyon-02-2019-18-e1585214779656.jpg" alt="chambre froide">
+        <h3><%= chamber.name %></h3>
+        <%= link_to "Voir le détail", chamber_path(chamber), class: "btn btn-info" %>
+
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+</div>
