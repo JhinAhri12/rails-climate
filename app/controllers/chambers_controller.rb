@@ -7,17 +7,29 @@ class ChambersController < ApplicationController
   def create
     @chamber = Chamber.new(chamber_params)
     @chamber.save
-    # Will raise ActiveModel::ForbiddenAttributesError
+
   end
 
   def show
     @chamber = Chamber.find(params[:id])
   end
 
+  def edit
+    @chamber = Chamber.find(params[:id])
+
+
+  end
+
+  def update
+    @chamber = Chamber.find(params[:id])
+    @chamber.update(chamber_params)
+    redirect_to chamber_path(@chamber)
+  end
+
   private
 
   def chamber_params
-    params.require(:chamber).permit(:name, :temperature, :hygrometrie, :day, :isValid)
+    params.require(:chamber).permit(:name, :temperature, :hygrometrie, :day, :isValid, :user_id)
   end
 
 end
