@@ -1,0 +1,6 @@
+<%= simple_form_for [@chamber,@comment] do |f| %>
+  <%= f.input :description %>
+  <%= f.input :isValid %>
+
+  <%= f.submit "Ajouter le commentaire", class: "btn btn-outline-primary " %>
+<% end %>

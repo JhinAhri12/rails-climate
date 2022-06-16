@@ -1,0 +1,7 @@
+<%= simple_form_for [@chamber,@sonde] do |f| %>
+  <%= f.input :mesure, collection: ['température','hygrométrie'] %>
+  <%= f.input :day %>
+  <%= f.input :valeur %>
+
+  <%= f.submit "Ajouter les données", class: "btn btn-outline-primary " %>
+<% end %>

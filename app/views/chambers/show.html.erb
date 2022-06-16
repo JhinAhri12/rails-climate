@@ -1,33 +1,51 @@
-<div class="container">
-
 <%= link_to "Back", root_path,class: "btn btn-outline-primary mt-2" %>
-        <% if @chamber.isValid === true %>
-          <h3 class="alert alert-success">Données correctes</h3>
-        <% elsif @chamber.isValid === false %>
-          <h3 class="alert alert-danger">Données incorrectes</h3>
-        <% else %>
-         <h3 class="alert alert-info">Données en cours d'analyse</h3>
-        <% end %>
+
   <div class="row">
     <div class="col-md-12 card text-center mt-2 mb-1">
       <div class="card-body">
         <h2><%= @chamber.name %></h2>
         <img class="img-thumbnail" src="https://www.dagard.com/files/2020/03/euexpo-cuisine-516-lyon-02-2019-18-e1585214779656.jpg" alt="chambre froide">
-        <p> température : <%= @chamber.temperature %></p>
-        <p> hygrometrie : <%= @chamber.hygrometrie %></p>
-        <p> date : <%= @chamber.day %></p>
+
+
+        <ul class="list-group">
+          <% @chamber.sondes.each do |sonde| %>
+            <% if sonde.mesure == "température"%>
+            Température
+              <li class="list-group-item"><%= sonde.day %> : <%= sonde.valeur %>°</li>
+            <% else %>
+            Hygrométrie
+              <li class="list-group-item"><%= sonde.day %> : <%= sonde.valeur %>%</li>
+            <% end %>
+          <% end %>
+        </ul>
 
         <% if current_user.role == "admin" %>
           <%= link_to "Editer la chambre froide", edit_chamber_path(@chamber), class: "btn btn-primary mb-2" %>
+        <% elsif current_user.role == "technicien" %>
+          <%= link_to "Ajouter des température", new_chamber_sonde_path(@chamber), class: "btn btn-primary mb-2" %>
+        <% else %>
+          <% if @chamber.comments.any? && @chamber.sondes.any? %>
+            <%= link_to "Passer en revue la journée", new_chamber_comment_path(@chamber), class: "btn btn-primary mb-2" %>
+          <% end %>
         <% end %>
-
       </div>
     </div>
   </div>
-  <% if current_user.role == "officine" %>
-          <%= simple_form_for @chamber do |f| %>
-            <%= f.input :isValid %>
-            <%= f.submit "Changer le statut de la chambre froide", class: "btn btn-outline-primary " %>
-          <% end %>
-        <% end %>
-</div>
+
+<% if @chamber.comments.any? %>
+  <% @chamber.comments.each do |comment| %>
+    <% if comment.isValid === true %>
+      <div class="alert alert-success">
+        Données correctes
+      </div>
+    <% else %>
+      <div class="alert alert-danger">
+        Données incorrectes
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <div class="alert alert-info">
+    Données en cours d'analyse
+  </div>
+<% end %>
