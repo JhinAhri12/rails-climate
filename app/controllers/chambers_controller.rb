@@ -7,7 +7,7 @@ class ChambersController < ApplicationController
   def create
     @chamber = Chamber.new(chamber_params)
     @chamber.save
-
+    redirect_to root_path
   end
 
   def show
@@ -29,7 +29,7 @@ class ChambersController < ApplicationController
   private
 
   def chamber_params
-    params.require(:chamber).permit(:name, :temperature, :hygrometrie, :day, :isValid, :user_id)
+    params.require(:chamber).permit(:name, :user_id)
   end
 
 end
